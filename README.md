@@ -303,7 +303,7 @@ ggraph(d_graph, layout = "fr") +  # Use Fruchterman-Reingold layout for force-di
 - Transparency: The edges have a semi-transparent blue color for better visibility of the node structure.
 
 Image of the Directed Graph with Arrows:
-![Alt text](images/)
+![Alt text](projectImages/VizGraphImage3.png)
 
 ## 2. **Directed Graph with Curved Edges**
 
@@ -329,6 +329,7 @@ ggraph(d_graph, layout = "fr") +
 - Arrowheads: As before, arrows are used to indicate the direction.
 - Node and label customization: Nodes are red with labels to identify them.
 Image of the Directed Graph with Curved Edges:
+![Alt text](projectImages/VizGraphImage1.png)
 
 ## 3. **Undirected Graph**
 Finally, we visualize the undirected graph using the same Fruchterman-Reingold layout. Since the graph is undirected, the edges do not have arrows. Here's the code for this visualization:
@@ -346,9 +347,9 @@ ggraph(ud_graph, layout = "fr") +  # Fruchterman-Reingold layout
 - Undirected edges: The edges do not have direction, which is typical for undirected graphs.
 - Node appearance: Nodes are shown in purple, and their names are labeled for clarity.
 
+![Alt text](projectImages/VizGraphImage2.png)
 
-
-
+---
 
 ## Full Code for Java
 ```java
