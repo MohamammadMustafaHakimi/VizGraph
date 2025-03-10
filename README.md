@@ -11,8 +11,9 @@
     - [2. Reading the CSV and Creating Graphs](#2-reading-the-csv-and-creating-graphs)
     - [3. Hamiltonian and Eulerian Path/Cycle Checks](#3-hamiltonian-and-eulerian-pathcycle-checks)
     - [4. Running the Analysis](#4-running-the-analysis)
-5. [Full Code for Java](#full-code-for-java)
-6. [Full Code for R](#full-code-for-r)
+    - [5. Visualizing the Graphs](#5-visualizing-the-graphs)
+4. [Full Code for Java](#full-code-for-java)
+5. [Full Code for R](#full-code-for-r)
 
 
 ## Overview
@@ -257,7 +258,7 @@ has_hamiltonian_path <- function(graph) {
 
 ---
 
-### 4. **Running the Analysis**
+### 3. **Running the Analysis**
 This code runs the checks for both Hamiltonian and Eulerian paths and cycles for the directed graph.
 
 ```r
@@ -275,6 +276,79 @@ cat("Eulerian cycle exists:", has_eulerian_cycle(d_graph, directed = TRUE), "\n"
 - The functions are called on the directed graph to check if Hamiltonian or Eulerian paths and cycles exist, and the results are printed.
 
 ---
+### 4. **Visualizing the Graphs**
+
+In this section, we generate and visualize the directed and undirected graphs using the `ggraph` package in R.
+
+## 1. **Directed Graph with Arrows**
+
+We visualize the directed graph using the **Fruchterman-Reingold layout**, which is a force-directed layout for graph visualization. The graph edges are drawn with arrows, representing the direction of relationships between nodes. Here's the code for this visualization:
+
+```r
+ggraph(d_graph, layout = "fr") +  # Use Fruchterman-Reingold layout for force-directed graph
+  geom_edge_link(
+    color = "blue",
+    alpha = 0.6,   # Edge transparency
+    arrow = arrow(length = unit(2, "mm")),  # Add arrows to edges
+    end_cap = circle(3, "mm")  # Adjust arrowhead size
+  ) +
+  geom_node_point(size = 5, color = "red") +  # Customize node appearance
+  geom_node_text(aes(label = name), repel = TRUE, size = 4) +  # Add node labels with repulsion to avoid overlap
+  theme_void() +  # Remove axis and background for a clean graph
+  ggtitle("Directed Graph from CSV edge list")  # Set graph title
+```
+**Explanation:**
+- Arrowheads: Arrows are added to indicate the direction of the edges.
+- Node appearance: Nodes are displayed as red points with labels.
+- Transparency: The edges have a semi-transparent blue color for better visibility of the node structure.
+
+Image of the Directed Graph with Arrows:
+![Alt text](images/)
+
+## 2. **Directed Graph with Curved Edges**
+
+For a smoother visualization, we use curved edges in the graph. This makes the graph appear cleaner and less cluttered. Here's the code for this visualization:
+
+```r
+ggraph(d_graph, layout = "fr") +
+  geom_edge_arc(
+    arrow = arrow(length = unit(2, "mm")),
+    color = "blue",
+    alpha = 0.6,
+    curvature = 0.2  # Adjust curvature for smoother edges
+  ) +
+  geom_node_point(size = 5, color = "red") +
+  geom_node_text(aes(label = name), repel = TRUE, size = 4) +
+  theme_void() +
+  ggtitle("Directed Graph with Curved Edges")
+
+```
+
+**Explanation:**
+- Curved edges: The edges are drawn with a slight curvature, making the graph look less angular.
+- Arrowheads: As before, arrows are used to indicate the direction.
+- Node and label customization: Nodes are red with labels to identify them.
+Image of the Directed Graph with Curved Edges:
+
+## 3. **Undirected Graph**
+Finally, we visualize the undirected graph using the same Fruchterman-Reingold layout. Since the graph is undirected, the edges do not have arrows. Here's the code for this visualization:
+
+```r
+ggraph(ud_graph, layout = "fr") +  # Fruchterman-Reingold layout
+  geom_edge_link(color = "green", alpha = 0.6) +  # Customize edges
+  geom_node_point(size = 5, color = "purple") +  # Customize node colors
+  geom_node_text(aes(label = name), repel = TRUE, size = 4) +  # Add node labels
+  theme_void() +  # Remove background and axes for cleaner look
+  ggtitle("Undirected Graph from CSV edge list")  # Set graph title
+```
+
+**Explanation:**
+- Undirected edges: The edges do not have direction, which is typical for undirected graphs.
+- Node appearance: Nodes are shown in purple, and their names are labeled for clarity.
+
+
+
+
 
 ## Full Code for Java
 ```java
